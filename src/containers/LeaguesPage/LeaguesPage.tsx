@@ -3,11 +3,14 @@ import { LeagueList } from "../../components/LeagueList/LeagueList";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { SportsDropdown } from "../../components/SportsDropdown/SportsDropdown";
 import { useLeagues } from "../../hooks/useLeagues";
+import { LeagueBadge } from "../LeagueBadge/LeagueBadge";
 import "./LeaguesPage.scss";
 
 export function LeaguesPage() {
   const [search, setSearch] = useState("");
   const [sport, setSport] = useState("");
+  const [selectedLeagueId, setSelectedLeagueId] = useState<string | null>(null);
+
   const { leagues, isLoading, error, mutate } = useLeagues();
 
   const sports = useMemo(() => {
@@ -19,10 +22,17 @@ export function LeaguesPage() {
     const query = search.trim().toLowerCase();
     return leagues.filter((league) => {
       const sportMatches = sport === "" || league.strSport === sport;
-      const searchMatches = query === "" || league.strLeague.toLowerCase().includes(query);
+      const searchMatches =
+        query === "" || league.strLeague.toLowerCase().includes(query);
       return sportMatches && searchMatches;
     });
   }, [leagues, search, sport]);
+
+  const selectedLeague = selectedLeagueId
+    ? (leagues.find((league) => league.idLeague === selectedLeagueId) ?? null)
+    : null;
+
+  const handleSelect = (id: string) => setSelectedLeagueId(id);
 
   if (isLoading) {
     return <p>Loading leagues</p>;
@@ -50,7 +60,15 @@ export function LeaguesPage() {
 
       <section>
         <div>
-          <LeagueList leagues={filteredLeagues} onSelect={() => {}} />
+          <LeagueList leagues={filteredLeagues} onSelect={handleSelect} />
+        </div>
+
+        <div>
+          {selectedLeague ? (
+            <LeagueBadge league={selectedLeague} />
+          ) : (
+            <p>Select a league</p>
+          )}
         </div>
       </section>
     </article>
