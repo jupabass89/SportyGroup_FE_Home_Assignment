@@ -1,4 +1,4 @@
-# Sports Leagues Explorer
+# Sports Leagues
 
 A React + TypeScript app for browsing sports leagues and viewing league badges from TheSportsDB API.
 
