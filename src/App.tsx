@@ -1,4 +1,4 @@
-import LeaguesPage from "./containers/LeaguesPage/LeaguesPage";
+import { LeaguesPage } from "./containers/LeaguesPage/LeaguesPage";
 
 function App() {
   return <LeaguesPage />;

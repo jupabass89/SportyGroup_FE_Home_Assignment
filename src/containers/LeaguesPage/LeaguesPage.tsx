@@ -1,20 +1,28 @@
-import { useState, useMemo } from "react";
-import { useLeagues } from "../../hooks/useLeagues";
-import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { useMemo, useState } from "react";
 import { LeagueList } from "../../components/LeagueList/LeagueList";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { SportsDropdown } from "../../components/SportsDropdown/SportsDropdown";
+import { useLeagues } from "../../hooks/useLeagues";
 import "./LeaguesPage.scss";
 
 export function LeaguesPage() {
   const [search, setSearch] = useState("");
-
+  const [sport, setSport] = useState("");
   const { leagues, isLoading, error, mutate } = useLeagues();
+
+  const sports = useMemo(() => {
+    const sportsList = leagues.map((league) => league.strSport);
+    return [...new Set(sportsList)].sort();
+  }, [leagues]);
 
   const filteredLeagues = useMemo(() => {
     const query = search.trim().toLowerCase();
     return leagues.filter((league) => {
-      return query === "" || league.strLeague.toLowerCase().includes(query);
+      const sportMatches = sport === "" || league.strSport === sport;
+      const searchMatches = query === "" || league.strLeague.toLowerCase().includes(query);
+      return sportMatches && searchMatches;
     });
-  }, [leagues, search]);
+  }, [leagues, search, sport]);
 
   if (isLoading) {
     return <p>Loading leagues</p>;
@@ -37,6 +45,7 @@ export function LeaguesPage() {
 
       <div>
         <SearchBar value={search} onChange={setSearch} />
+        <SportsDropdown sports={sports} value={sport} onChange={setSport} />
       </div>
 
       <section>
