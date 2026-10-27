@@ -35,39 +35,74 @@ export function LeaguesPage() {
   const handleSelect = (id: string) => setSelectedLeagueId(id);
 
   if (isLoading) {
-    return <p>Loading leagues</p>;
+    return (
+      <article className="league-explorer">
+        <p className="league-explorer__status" role="status">
+          Loading leagues
+        </p>
+      </article>
+    );
   }
 
   if (error) {
     return (
-      <div>
-        <p>Failed to load leagues: {error.message}</p>
-        <button type="button" onClick={() => mutate()}>
-          Let's try again
-        </button>
+      <div className="league-explorer">
+        <div className="league-explorer__status" role="alert">
+          <p>Failed to load leagues: {error.message}</p>
+          <button
+            className="league-explorer__retry"
+            type="button"
+            onClick={() => mutate()}
+          >
+            Let's try again
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <article>
-      <h1>Sports Leagues Explorer</h1>
+    <article className="league-explorer">
+      <header className="league-explorer__header">     
+        <h1 className="league-explorer__title">Sports Leagues </h1>
 
-      <div>
+      </header>
+
+      <div className="league-explorer__filters">
         <SearchBar value={search} onChange={setSearch} />
         <SportsDropdown sports={sports} value={sport} onChange={setSport} />
       </div>
 
-      <section>
-        <div>
-          <LeagueList leagues={filteredLeagues} onSelect={handleSelect} />
+      <section className="league-explorer__content">
+        <div className="league-explorer__list-panel">
+          <div className="league-explorer__panel-heading">
+            <h2 className="league-explorer__panel-title">Leagues</h2>
+            <span className="league-explorer__count">
+              {filteredLeagues.length}
+            </span>
+          </div>
+          <LeagueList
+            leagues={filteredLeagues}
+            onSelect={handleSelect}
+            selectedLeagueId={selectedLeagueId}
+          />
         </div>
 
-        <div>
+        <div className="league-explorer__detail-panel">
           {selectedLeague ? (
             <LeagueBadge league={selectedLeague} />
           ) : (
-            <p>Select a league</p>
+            <div className="league-explorer__placeholder">
+              <span className="league-explorer__placeholder-mark" aria-hidden="true">
+                ✦
+              </span>
+              <h2 className="league-explorer__placeholder-title">
+                Choose a league
+              </h2>
+              <p className="league-explorer__placeholder-text">
+                Select one from the list to see its badge and season.
+              </p>
+            </div>
           )}
         </div>
       </section>

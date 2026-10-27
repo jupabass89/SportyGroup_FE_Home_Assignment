@@ -1,0 +1,16 @@
+.league-list {
+  display: grid;
+  gap: 8px;
+  max-height: 560px;
+  margin: 0;
+  padding: 12px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.league-list__empty {
+  margin: 0;
+  padding: 32px 20px;
+  color: var(--color-text-muted);
+  text-align: center;
+}

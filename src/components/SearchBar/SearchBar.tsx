@@ -7,9 +7,12 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <section>
-      <label>Search leagues</label>
+    <section className="search-bar">
+      <label className="search-bar__label" htmlFor="league-search">
+        Search leagues
+      </label>
       <input
+        className="search-bar__input"
         type="search"
         id="league-search"
         placeholder="Premier League"

@@ -1,0 +1,13 @@
+.badge-image__img {
+  display: block;
+  width: min(220px, 75%);
+  max-height: 220px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.badge-image__status {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}

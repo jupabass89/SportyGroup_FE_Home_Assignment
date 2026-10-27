@@ -1,0 +1,53 @@
+.league-item {
+  min-width: 0;
+}
+
+.league-item__button {
+  display: flex;
+  width: 100%;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.league-item__button:hover {
+  border-color: var(--color-border);
+  background: #f8faff;
+}
+
+.league-item__button--selected {
+  border-color: #cbd8ff;
+  background: #edf2ff;
+}
+
+.league-item__name {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.league-item__sport {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f0f2f5;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.league-item__button--selected .league-item__sport {
+  background: #dce6ff;
+  color: var(--color-primary-dark);
+}

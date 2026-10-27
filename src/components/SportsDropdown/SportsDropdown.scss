@@ -1,0 +1,23 @@
+.sports-filter {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sports-filter__label {
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.sports-filter__select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 38px 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background-color: #fff;
+  color: var(--color-text);
+  cursor: pointer;
+}

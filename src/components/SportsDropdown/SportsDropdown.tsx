@@ -12,9 +12,12 @@ export function SportsDropdown({
   onChange,
 }: SportsDropdownProps) {
   return (
-    <section>
-      <label>Sport</label>
+    <section className="sports-filter">
+      <label className="sports-filter__label" htmlFor="sport-dropdown">
+        Sport
+      </label>
       <select
+        className="sports-filter__select"
         id="sport-dropdown"
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -5,17 +5,27 @@ import "./LeagueList.scss";
 interface LeagueListProps {
   leagues: League[];
   onSelect: (id: string) => void;
+  selectedLeagueId: string | null;
 }
 
-export function LeagueList({ leagues, onSelect }: LeagueListProps) {
+export function LeagueList({
+  leagues,
+  onSelect,
+  selectedLeagueId,
+}: LeagueListProps) {
   if (leagues.length === 0) {
-    return <p>No results found</p>;
+    return <p className="league-list__empty">No results found.</p>;
   }
 
   return (
-    <ul>
+    <ul className="league-list">
       {leagues.map((league) => (
-        <LeagueItem key={league.idLeague} league={league} onSelect={onSelect} />
+        <LeagueItem
+          key={league.idLeague}
+          league={league}
+          onSelect={onSelect}
+          isSelected={league.idLeague === selectedLeagueId}
+        />
       ))}
     </ul>
   );

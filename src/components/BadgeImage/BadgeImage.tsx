@@ -8,12 +8,16 @@ interface BadgeImageProps {
 
 export function BadgeImage({ src, alt, isLoading }: BadgeImageProps) {
   if (isLoading) {
-    return <p>Loading badge</p>;
+    return (
+      <p className="badge-image__status" role="status">
+        Loading badge
+      </p>
+    );
   }
 
   if (!src) {
-    return <p>No badge image</p>;
+    return <p className="badge-image__status">No badge image</p>;
   }
 
-  return <img src={src} alt={alt} loading="lazy" />;
+  return <img className="badge-image__img" src={src} alt={alt} loading="lazy" />;
 }
